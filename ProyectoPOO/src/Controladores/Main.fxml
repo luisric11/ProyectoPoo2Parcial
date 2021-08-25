@@ -44,7 +44,7 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\$20000" wrappingWidth="65.435546875">
+                  <Text fx:id="presupuestoText" strokeType="OUTSIDE" strokeWidth="0.0" text="\$20000" wrappingWidth="65.435546875">
                      <font>
                         <Font size="14.0" />
                      </font></Text>
@@ -57,7 +57,7 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\$20000" wrappingWidth="65.435546875">
+                  <Text fx:id="gastosText" strokeType="OUTSIDE" strokeWidth="0.0" text="\$20000" wrappingWidth="65.435546875">
                      <font>
                         <Font size="14.0" />
                      </font>
