@@ -9,6 +9,6 @@ package Clases;
  *
  * @author ACER
  */
-public class Comercial {
+public class Comercial  {
     
 }

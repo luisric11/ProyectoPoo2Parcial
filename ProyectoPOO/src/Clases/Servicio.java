@@ -9,10 +9,14 @@ package Clases;
  *
  * @author ACER
  */
-public class Servicio {
+public class Servicio extends Objeto {
     
     private String nombre;
     private Double precio;
+
+    public Servicio(String direccion) {
+        super(direccion);
+    }
     
     
 }

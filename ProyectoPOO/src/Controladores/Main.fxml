@@ -1,11 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.MainController">
-    
+
+<AnchorPane id="AnchorPane" prefHeight="641.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="Controladores.MainController">
+   <children>
+      <AnchorPane layoutY="-5.0" prefHeight="52.0" prefWidth="1033.0">
+         <children>
+            <HBox layoutX="14.0" layoutY="13.0" prefHeight="16.0" prefWidth="200.0" style="-fx-spacing: 12;">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CIUDAD" wrappingWidth="43.435546875" />
+                  <TextField alignment="CENTER" depthTest="DISABLE" prefHeight="25.0" prefWidth="115.0" style="-fx-background-radius: 12px;">
+                     <opaqueInsets>
+                        <Insets right="20.0" />
+                     </opaqueInsets>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox layoutX="214.0" layoutY="13.0" prefHeight="16.0" prefWidth="200.0" style="-fx-spacing: 12;">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ALCALDE" wrappingWidth="65.435546875" />
+                  <TextField alignment="CENTER" depthTest="DISABLE" prefHeight="25.0" prefWidth="115.0" style="-fx-background-radius: 12px;">
+                     <opaqueInsets>
+                        <Insets right="20.0" />
+                     </opaqueInsets>
+                  </TextField>
+               </children>
+            </HBox>
+            <ComboBox layoutX="427.0" layoutY="13.0" prefWidth="150.0" promptText="DIFICULTAD" />
+            <HBox layoutX="610.0" layoutY="17.0" prefHeight="16.0" prefWidth="200.0" style="-fx-spacing: 12;">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PRESUPUESTO" wrappingWidth="84.435546875" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\$20000" wrappingWidth="65.435546875" />
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="97.0" layoutY="288.0" prefHeight="40.0" prefWidth="200.0" />
+   </children>
 </AnchorPane>
