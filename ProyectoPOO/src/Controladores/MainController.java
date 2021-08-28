@@ -93,12 +93,17 @@ public class MainController implements Initializable {
                     imagen.setFitWidth(40);
                     stackPane.getChildren().add(imagen);
                     gridpane.add(stackPane,i, j);
+                    stackPane.setOnMouseClicked(e -> tocarStackPane());
                 } catch (FileNotFoundException ex) {
                     System.exit(0);
                     Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
+    }
+    
+    private void tocarStackPane(){
+        System.out.println("tocado");
     }
     
 }
