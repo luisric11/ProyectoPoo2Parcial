@@ -17,6 +17,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import Clases.Administrador;
+import Clases.Casilla;
+import Clases.Objeto;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
@@ -43,6 +45,9 @@ public class MainController implements Initializable {
     private ComboBox dificultad;
     
     @FXML
+    private ComboBox servicios;
+    
+    @FXML
     private Text presupuestoText;
     
     @FXML
@@ -66,7 +71,8 @@ public class MainController implements Initializable {
         try {
             gridpane = new GridPane();
             pane.setCenter(gridpane);
-            llenarDificultad();     
+            llenarDificultad();
+            llenarServicios();
             inicializargridPane();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
@@ -81,6 +87,15 @@ public class MainController implements Initializable {
         dificultad.getItems().addAll(cons);
     }
     
+    private void llenarServicios(){
+        ObservableList<String> servs = FXCollections.observableArrayList();
+        servs.add("AGUA");
+        servs.add("LUZ");
+        servs.add("PARQUE");
+        servs.add("ESCUELA");
+        servicios.getItems().addAll(servs);
+    }
+    
     private void inicializargridPane() throws FileNotFoundException{
         gridpane.getColumnConstraints().clear();
         for(int i=0;i<Administrador.COLUMNAS;i++){
@@ -92,8 +107,9 @@ public class MainController implements Initializable {
                     imagen.setFitHeight(40);
                     imagen.setFitWidth(40);
                     stackPane.getChildren().add(imagen);
+                    Casilla casilla = new Casilla(stackPane);
                     gridpane.add(stackPane,i, j);
-                    stackPane.setOnMouseClicked(e -> tocarStackPane());
+                    stackPane.setOnMouseClicked(e -> tocarStackPane(casilla));
                 } catch (FileNotFoundException ex) {
                     System.exit(0);
                     Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
@@ -102,8 +118,27 @@ public class MainController implements Initializable {
         }
     }
     
-    private void tocarStackPane(){
-        System.out.println("tocado");
+    private void tocarStackPane(Casilla casilla){
+        if(servicios.getSelectionModel().getSelectedItem()!= null){
+            switch(servicios.getSelectionModel().getSelectedItem().toString()){
+                case "AGUA":
+                    System.out.println("agua");
+                    break;
+                    case "LUZ":
+                    System.out.println("LUZ");
+                    break;
+                    case "PARQUE":
+                    System.out.println("PARQUE");
+                    break;
+                    case "ESCUELA":
+                    System.out.println("ESCUELA");
+                    break;
+            }
+        }
+    }
+    
+    private void modificarStackPane(Objeto objeto){
+        
     }
     
 }

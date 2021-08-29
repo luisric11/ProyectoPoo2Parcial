@@ -22,5 +22,6 @@ public class Administrador {
     public static final int CONTAMINACION_IMPUESTO= 150;
     public static final int VECINDARIO=3;
     public static final int MESES_QUIEBRA=3;
+    
 
 }

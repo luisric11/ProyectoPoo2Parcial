@@ -5,6 +5,8 @@
  */
 package Clases;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author alberto
@@ -16,6 +18,7 @@ public class Ciudad {
     private Dificultad dificultad;
     private double presupuesto;
     private double gastos;
+    private ArrayList<Casilla> casillas;
 
     public Ciudad(String ciudad, String alcalde, Dificultad dificultad, double presupuesto, double gastos) {
         this.ciudad = ciudad;
@@ -23,7 +26,18 @@ public class Ciudad {
         this.dificultad = dificultad;
         this.presupuesto = presupuesto;
         this.gastos = gastos;
+        this.casillas = new ArrayList<>();
     }
+
+    public Ciudad(String ciudad, String alcalde, Dificultad dificultad, double presupuesto, double gastos, ArrayList<Casilla> casillas) {
+        this.ciudad = ciudad;
+        this.alcalde = alcalde;
+        this.dificultad = dificultad;
+        this.presupuesto = presupuesto;
+        this.gastos = gastos;
+        this.casillas = casillas;
+    }
+    
 
     public String getCiudad() {
         return ciudad;

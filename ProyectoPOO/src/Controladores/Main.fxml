@@ -67,7 +67,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <ComboBox fx:id="dificultad1" layoutX="610.0" layoutY="19.0" prefWidth="150.0" promptText="SERVICIO" style="-fx-background-radius: 12px;" />
+            <ComboBox fx:id="servicios" layoutX="610.0" layoutY="19.0" prefWidth="150.0" promptText="SERVICIO" style="-fx-background-radius: 12px;" />
          </children>
       </AnchorPane>
       <BorderPane fx:id="pane" layoutX="52.0" layoutY="103.0" prefHeight="675.0" prefWidth="1114.0" />
