@@ -5,6 +5,16 @@
  */
 package Clases;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author ACER
@@ -22,6 +32,66 @@ public class Administrador {
     public static final int CONTAMINACION_IMPUESTO= 150;
     public static final int VECINDARIO=3;
     public static final int MESES_QUIEBRA=3;
+    public static Dictionary<String, ArrayList<String>> serviciosData;
+    public static Dictionary<String, ArrayList<String>> construccionData;
     
-
+    public static void cargarServicios(){
+        serviciosData = new Hashtable<String, ArrayList<String>>();
+        FileReader f = null;
+        String cadena;
+        try {
+            f = new FileReader("src/servicios.txt");
+            BufferedReader b = new BufferedReader(f);
+            b.readLine();
+            while((cadena = b.readLine())!=null) {
+                String [] data = cadena.split(";");
+                ArrayList<String> servicio = new ArrayList<>();
+                servicio.add(data[1]);
+                servicio.add(data[2]);
+                servicio.add(data[3]);
+                serviciosData.put(data[0],servicio);
+            }   b.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                f.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    public static void cargarConstrucciones(){
+        construccionData = new Hashtable<String, ArrayList<String>>();
+        FileReader f = null;
+        String cadena;
+        try {
+            f = new FileReader("src/tipoConstruccion.txt");
+            BufferedReader b = new BufferedReader(f);
+            b.readLine();
+            while((cadena = b.readLine())!=null) {
+                String [] data = cadena.split(";");
+                ArrayList<String> construccion = new ArrayList<>();
+                construccion.add(data[1]);
+                construccion.add(data[2]);
+                construccion.add(data[3]);
+                construccion.add(data[4]);
+                construccion.add(data[5]);
+                construccionData.put(data[0],construccion);
+            }   b.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                f.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 }
