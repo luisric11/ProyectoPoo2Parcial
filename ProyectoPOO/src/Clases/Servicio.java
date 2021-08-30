@@ -11,51 +11,19 @@ package Clases;
  */
 public class Servicio extends Objeto {
     
-    private String nombre;
-    private String ruta;
+    
     private Double precioConstruccion;
     private Double costoMensual;
 
-    public Servicio(String nombre, String ruta, Double precioConstruccion, Double costoMensual, String direccion) {
-        super(direccion);
-        this.nombre = nombre;
-        this.ruta = ruta;
+    public Servicio(String nombre, String ruta,Double precioConstruccion, Double costoMensual) {
+        super(nombre,ruta);
         this.precioConstruccion = precioConstruccion;
         this.costoMensual = costoMensual;
     }
+    
 
-    public String getNombre() {
-        return nombre;
-    }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getRuta() {
-        return ruta;
-    }
-
-    public void setRuta(String ruta) {
-        this.ruta = ruta;
-    }
-
-    public Double getPrecioConstruccion() {
-        return precioConstruccion;
-    }
-
-    public void setPrecioConstruccion(Double precioConstruccion) {
-        this.precioConstruccion = precioConstruccion;
-    }
-
-    public Double getCostoMensual() {
-        return costoMensual;
-    }
-
-    public void setCostoMensual(Double costoMensual) {
-        this.costoMensual = costoMensual;
-    }
-
+   
     
     
     

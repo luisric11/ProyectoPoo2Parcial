@@ -5,8 +5,11 @@
  */
 package Clases;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 
 /**
  *
@@ -14,12 +17,31 @@ import javafx.scene.image.ImageView;
  */
 public class Objeto {
     
-    private ImageView imagen;
+    private String nombre;
+    private String ruta;
 
-    public Objeto(String direccion) {
-        Image image1 = new Image(getClass().getResourceAsStream(direccion));
-        imagen = new ImageView(image1);
+    public Objeto(String nombre,String ruta) {
+        this.ruta = ruta;
+        this.nombre = nombre;
     }
+    
+    public ImageView generarImagen() throws FileNotFoundException{
+        ruta = generarRuta(ruta,nombre);
+        Image image = new Image(new FileInputStream(ruta));
+        ImageView imagen = new ImageView(image);
+        imagen.setFitHeight(40);
+        imagen.setFitWidth(40);
+        return imagen;
+    }
+    
+        private String generarRuta(String ruta,String nombre){
+        if(!(nombre.equals("CALLE HORIZONTAL") || nombre.equals("CALLE VERTICAL"))){
+            System.out.println("A");
+        }
+        return ruta;
+    }
+    
+    
     
     
     

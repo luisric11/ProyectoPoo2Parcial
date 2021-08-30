@@ -15,8 +15,6 @@ public class Construccion extends Objeto {
     private Double agua;
     private Double impuestoSuelo;
     
-    public Construccion(String direccion) {
-        super(direccion);
-    }
+ 
     
 }

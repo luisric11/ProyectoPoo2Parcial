@@ -34,6 +34,8 @@ public class Administrador {
     public static final int MESES_QUIEBRA=3;
     public static Dictionary<String, ArrayList<String>> serviciosData;
     public static Dictionary<String, ArrayList<String>> construccionData;
+    public static Ciudad ciudad;
+    public static boolean permitirCreacion = false;
     
     public static void cargarServicios(){
         serviciosData = new Hashtable<String, ArrayList<String>>();
@@ -94,4 +96,10 @@ public class Administrador {
             }
         }
     }
+    
+    public static void cargarCiudad(){
+        
+    }
+    
+    
 }

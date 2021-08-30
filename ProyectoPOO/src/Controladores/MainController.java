@@ -19,8 +19,11 @@ import javafx.scene.text.Text;
 import Clases.Administrador;
 import Clases.Casilla;
 import Clases.Objeto;
+import Clases.Servicio;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.image.Image;
@@ -89,10 +92,10 @@ public class MainController implements Initializable {
     
     private void llenarServicios(){
         ObservableList<String> servs = FXCollections.observableArrayList();
-        servs.add("AGUA");
-        servs.add("LUZ");
-        servs.add("PARQUE");
-        servs.add("ESCUELA");
+        Enumeration enu = Administrador.serviciosData.keys();
+        while (enu.hasMoreElements()) {
+            servs.add(enu.nextElement().toString());
+        }
         servicios.getItems().addAll(servs);
     }
     
@@ -120,19 +123,17 @@ public class MainController implements Initializable {
     
     private void tocarStackPane(Casilla casilla){
         if(servicios.getSelectionModel().getSelectedItem()!= null){
-            switch(servicios.getSelectionModel().getSelectedItem().toString()){
-                case "AGUA":
-                    System.out.println("agua");
-                    break;
-                    case "LUZ":
-                    System.out.println("LUZ");
-                    break;
-                    case "PARQUE":
-                    System.out.println("PARQUE");
-                    break;
-                    case "ESCUELA":
-                    System.out.println("ESCUELA");
-                    break;
+            Enumeration enu = Administrador.serviciosData.keys();
+            String s = servicios.getSelectionModel().getSelectedItem().toString();
+            while (enu.hasMoreElements()) {
+                if(enu.nextElement().toString().equals(s)){
+                    ArrayList<String> data = Administrador.serviciosData.get(s);
+                    Servicio servicio = new Servicio(s,data.get(0),Double.valueOf(data.get(1)),Double.valueOf(data.get(2)));
+                    casilla.setObjeto(servicio);
+                    System.out.println(s);
+                    
+                }
+                
             }
         }
     }
