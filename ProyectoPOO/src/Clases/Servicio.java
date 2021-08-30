@@ -32,6 +32,11 @@ public class Servicio extends Objeto {
     public Double getCostoMensual() {
         return costoMensual;
     }
+    
+    @Override
+    public Double getCostoTotal(){
+        return costoMensual;
+    }
 
     public void setCostoMensual(Double costoMensual) {
         this.costoMensual = costoMensual;

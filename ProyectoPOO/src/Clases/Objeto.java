@@ -34,7 +34,7 @@ public class Objeto {
         return imagen;
     }
     
-        private String generarRuta(String ruta,String nombre){
+    private String generarRuta(String ruta,String nombre){
         if(!(nombre.equals("CALLE HORIZONTAL") || nombre.equals("CALLE VERTICAL"))){
             int numero = (int)(Math.random()*3+1);
             ruta=ruta.concat(nombre.concat(String.valueOf(numero)));
@@ -44,6 +44,16 @@ public class Objeto {
         }
         return ruta;
     }
+    
+    public Double getCostoTotal(){
+        return 0.0;
+    }
+    
+    public Double getIngresoTotal(){
+        return 0.0;
+    }
+        
+     
     
     
     

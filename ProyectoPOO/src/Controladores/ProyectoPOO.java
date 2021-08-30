@@ -6,6 +6,7 @@
 package Controladores;
 
 import Clases.Administrador;
+import Clases.Tiempo;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,6 +26,7 @@ public class ProyectoPOO extends Application {
         Administrador.cargarServicios();
         Administrador.cargarConstrucciones();
         launch(args);
+
     }
 
     @Override

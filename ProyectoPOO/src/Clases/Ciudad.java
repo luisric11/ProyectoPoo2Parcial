@@ -19,17 +19,20 @@ public class Ciudad {
     private double presupuesto;
     private double gastos;
     private ArrayList<Casilla> casillas;
+    private int dia;
 
-    public Ciudad(String ciudad, String alcalde, Dificultad dificultad, double presupuesto, double gastos) {
+    public Ciudad(String ciudad, String alcalde, Dificultad dificultad, double presupuesto, double gastos, ArrayList<Casilla> casillas,int dia) {
         this.ciudad = ciudad;
         this.alcalde = alcalde;
         this.dificultad = dificultad;
         this.presupuesto = presupuesto;
         this.gastos = gastos;
-        this.casillas = new ArrayList<>();
+        this.casillas = casillas;
+        this.dia = dia;
     }
 
     public Ciudad(String ciudad, String alcalde, Dificultad dificultad, ArrayList<Casilla> casillas) {
+        this.dia = 0;
         this.ciudad = ciudad;
         this.alcalde = alcalde;
         this.dificultad = dificultad;
@@ -91,13 +94,51 @@ public class Ciudad {
     public void setGastos(double gastos) {
         this.gastos = gastos;
     }
+
+    public ArrayList<Casilla> getCasillas() {
+        return casillas;
+    }
+
+    public void setCasillas(ArrayList<Casilla> casillas) {
+        this.casillas = casillas;
+    }
+
+    public int getDia() {
+        return dia;
+    }
+
+    public void setDia(int dia) {
+        this.dia = dia;
+    }
+    
+    
     
     public void reducirPresupuesto(Double valor){
         presupuesto =  presupuesto - valor;
     }
     
-    public void aumentarGastoMensual(Double valor){
-        gastos = gastos + valor;
+    public void aumentarGastoMensual(){
+        Double valor=0.0;
+        for(Casilla c: casillas){ 
+            if(c.getObjeto()!=null){
+                valor = valor + c.getObjeto().getCostoTotal();
+            }   
+        }
+        gastos = valor;
+    }
+    
+    public  void aumentarPresupuesto(){
+        Double valor=0.0;
+        for(Casilla c: casillas){ 
+            if(c.getObjeto()!=null){
+                valor = valor + c.getObjeto().getIngresoTotal();
+            }   
+        }
+        presupuesto = presupuesto + valor;
+    }
+    
+    public void aumentarDia(){
+        dia++;
     }
     
     

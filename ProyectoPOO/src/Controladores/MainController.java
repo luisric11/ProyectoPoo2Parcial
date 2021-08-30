@@ -79,6 +79,8 @@ public class MainController implements Initializable {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        Tiempo t = new Tiempo();
+        t.start();
     }    
     
     private void llenarDificultad(){
@@ -117,7 +119,6 @@ public class MainController implements Initializable {
                     stackPane.setOnMouseClicked(e -> tocarStackPane(casilla));
                     Administrador.casillas.add(casilla);
                 } catch (FileNotFoundException ex) {
-                    System.exit(0);
                     Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -133,8 +134,7 @@ public class MainController implements Initializable {
                     ArrayList<String> data = Administrador.serviciosData.get(s);
                     Servicio servicio = new Servicio(s,data.get(0),Double.valueOf(data.get(1)),Double.valueOf(data.get(2)));
                     if(Administrador.ciudad.getPresupuesto() > servicio.getPrecioConstruccion()){             
-                        System.out.println(servicio.getCostoMensual());
-                        casilla.setObjeto(servicio);
+                        casilla.setObjeto(servicio); 
                         deducirServicio(servicio.getPrecioConstruccion(), servicio.getCostoMensual());
                     }
                 }                
@@ -144,7 +144,7 @@ public class MainController implements Initializable {
     
     @FXML
     public void presionarBoton(){
-        if(Administrador.permitirCreacion && ciudad.getText().length()>1 && alcalde.getText().length()>1){
+        if(Administrador.permitirCreacion && ciudad.getText().length()>1 && alcalde.getText().length()>1 && Administrador.jugable==false){
             if(dificultad.getSelectionModel().getSelectedItem()!= null){
                 String s = dificultad.getSelectionModel().getSelectedItem().toString();
                 Administrador.ciudad = new Ciudad(ciudad.getText(),alcalde.getText(),Dificultad.retornoDificultad(s),Administrador.casillas);
@@ -175,7 +175,7 @@ public class MainController implements Initializable {
     
     private void deducirServicio(Double precioConstruccion, Double gastoMensual){
         Administrador.ciudad.reducirPresupuesto(precioConstruccion);    
-        Administrador.ciudad.aumentarGastoMensual(gastoMensual);
+        Administrador.ciudad.aumentarGastoMensual();
         actualizarDatos();
         
     }

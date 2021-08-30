@@ -83,7 +83,6 @@ public class Administrador {
                 construccion.add(data[2]);
                 construccion.add(data[3]);
                 construccion.add(data[4]);
-                construccion.add(data[5]);
                 construccionData.put(data[0],construccion);
             }   b.close();
         } catch (FileNotFoundException ex) {
