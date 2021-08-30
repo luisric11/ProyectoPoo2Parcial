@@ -5,29 +5,33 @@
  */
 package Clases;
 
+import javafx.scene.text.Text;
+
 /**
  *
  * @author homar
  */
 public class Tiempo extends Thread {
     
-    private int tiempo;
+    public Text dia;
     
-    public Tiempo(){
+    public Tiempo(Text dia){
+        this.dia = dia;
     }
     
     public void run() {
       while(true){
-          System.out.println("a");
             try {
                 Thread.sleep(Administrador.DURACION_DIA_SEGUNDOS*1000);
                 Administrador.ciudad.aumentarDia();
+                dia.setText(String.valueOf(Administrador.ciudad.getDia()));
                 System.out.println(Administrador.ciudad.getDia());
                 if(Administrador.ciudad.getDia() % 30== 0){
                     System.out.println("mes");
                 }
             } 
             catch (Exception ex) {
+                System.out.println(ex);
             }
       }
    }

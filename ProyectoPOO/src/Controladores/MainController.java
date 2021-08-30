@@ -54,6 +54,9 @@ public class MainController implements Initializable {
     private Text gastosText;
     
     @FXML
+    private Text dia;
+    
+    @FXML
     private Button boton1;
     
     @FXML
@@ -79,8 +82,7 @@ public class MainController implements Initializable {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Tiempo t = new Tiempo();
-        t.start();
+        
     }    
     
     private void llenarDificultad(){
@@ -113,8 +115,9 @@ public class MainController implements Initializable {
                     ImageView imagen = new ImageView(image);
                     imagen.setFitHeight(40);
                     imagen.setFitWidth(40);
-                    stackPane.getChildren().add(imagen);
-                    Casilla casilla = new Casilla(stackPane);
+                    stackPane.getChildren().add(imagen); 
+                    int v = (i*1) * (j+1);
+                    Casilla casilla = new Casilla(stackPane,v);
                     gridpane.add(stackPane,i, j);
                     stackPane.setOnMouseClicked(e -> tocarStackPane(casilla));
                     Administrador.casillas.add(casilla);
@@ -151,6 +154,8 @@ public class MainController implements Initializable {
                 Administrador.jugable = true;
                 presupuestoText.setText(String.valueOf(Administrador.ciudad.getPresupuesto()));
                 Administrador.permitirCreacion = false;
+                Administrador.tiempo = new Tiempo(dia);
+                Administrador.tiempo.start();
             }
         }
     }

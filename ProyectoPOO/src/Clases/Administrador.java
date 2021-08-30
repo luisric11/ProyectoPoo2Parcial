@@ -38,6 +38,7 @@ public class Administrador {
     public static boolean permitirCreacion = true;
     public static ArrayList<Casilla> casillas;
     public static boolean jugable=false;
+    public static Tiempo tiempo;
     
     public static void cargarServicios(){
         serviciosData = new Hashtable<String, ArrayList<String>>();
