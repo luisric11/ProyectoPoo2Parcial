@@ -29,13 +29,26 @@ public class Ciudad {
         this.casillas = new ArrayList<>();
     }
 
-    public Ciudad(String ciudad, String alcalde, Dificultad dificultad, double presupuesto, double gastos, ArrayList<Casilla> casillas) {
+    public Ciudad(String ciudad, String alcalde, Dificultad dificultad, ArrayList<Casilla> casillas) {
         this.ciudad = ciudad;
         this.alcalde = alcalde;
         this.dificultad = dificultad;
-        this.presupuesto = presupuesto;
-        this.gastos = gastos;
+        obtenerPresupuesto(dificultad);
+        this.gastos = 0;
         this.casillas = casillas;
+    }
+    
+    private void obtenerPresupuesto(Dificultad d){
+        if(d.equals(Dificultad.FACIL)){
+            presupuesto = Administrador.PRESUPUESTO_INICIAL_FACIL;
+        }
+        else if(d.equals(Dificultad.INTERMEDIO)){
+            presupuesto = Administrador.PRESUPUESTO_INICIAL_MEDIO;            
+        }
+        else if(d.equals(Dificultad.DIFICIL)){
+            presupuesto = Administrador.PRESUPUESTO_INICIAL_DIFICIL;
+        }
+        
     }
     
 
@@ -78,6 +91,15 @@ public class Ciudad {
     public void setGastos(double gastos) {
         this.gastos = gastos;
     }
+    
+    public void reducirPresupuesto(Double valor){
+        presupuesto =  presupuesto - valor;
+    }
+    
+    public void aumentarGastoMensual(Double valor){
+        gastos = gastos + valor;
+    }
+    
     
     
     

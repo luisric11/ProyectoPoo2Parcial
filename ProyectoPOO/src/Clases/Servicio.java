@@ -20,6 +20,24 @@ public class Servicio extends Objeto {
         this.precioConstruccion = precioConstruccion;
         this.costoMensual = costoMensual;
     }
+
+    public Double getPrecioConstruccion() {
+        return precioConstruccion;
+    }
+
+    public void setPrecioConstruccion(Double precioConstruccion) {
+        this.precioConstruccion = precioConstruccion;
+    }
+
+    public Double getCostoMensual() {
+        return costoMensual;
+    }
+
+    public void setCostoMensual(Double costoMensual) {
+        this.costoMensual = costoMensual;
+    }
+    
+    
     
 
 

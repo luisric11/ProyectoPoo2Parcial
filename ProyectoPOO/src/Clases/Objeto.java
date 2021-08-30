@@ -36,7 +36,11 @@ public class Objeto {
     
         private String generarRuta(String ruta,String nombre){
         if(!(nombre.equals("CALLE HORIZONTAL") || nombre.equals("CALLE VERTICAL"))){
-            System.out.println("A");
+            int numero = (int)(Math.random()*3+1);
+            ruta=ruta.concat(nombre.concat(String.valueOf(numero)));
+            System.out.println(ruta);
+            ruta = ruta.concat(".png");
+            System.out.println(ruta);
         }
         return ruta;
     }

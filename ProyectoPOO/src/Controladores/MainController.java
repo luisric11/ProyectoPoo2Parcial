@@ -16,10 +16,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
-import Clases.Administrador;
-import Clases.Casilla;
-import Clases.Objeto;
-import Clases.Servicio;
+import Clases.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -71,6 +68,8 @@ public class MainController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        presupuestoText.setText("0");
+        gastosText.setText("0");
         try {
             gridpane = new GridPane();
             pane.setCenter(gridpane);
@@ -84,10 +83,12 @@ public class MainController implements Initializable {
     
     private void llenarDificultad(){
         ObservableList<String> cons = FXCollections.observableArrayList();
-        cons.add(Clases.Dificultad.FACIL.toString());
-        cons.add(Clases.Dificultad.INTERMEDIO.toString());
-        cons.add(Clases.Dificultad.DIFICIL.toString());
+        cons.add(Dificultad.FACIL.toString());
+        cons.add(Dificultad.INTERMEDIO.toString());
+        cons.add(Dificultad.DIFICIL.toString());
         dificultad.getItems().addAll(cons);
+        dificultad.setOnAction(e ->cambiarPresupuesto());
+
     }
     
     private void llenarServicios(){
@@ -100,6 +101,7 @@ public class MainController implements Initializable {
     }
     
     private void inicializargridPane() throws FileNotFoundException{
+        Administrador.casillas = new ArrayList<>();
         gridpane.getColumnConstraints().clear();
         for(int i=0;i<Administrador.COLUMNAS;i++){
             for(int j=0;j<Administrador.FILAS;j++){
@@ -113,6 +115,7 @@ public class MainController implements Initializable {
                     Casilla casilla = new Casilla(stackPane);
                     gridpane.add(stackPane,i, j);
                     stackPane.setOnMouseClicked(e -> tocarStackPane(casilla));
+                    Administrador.casillas.add(casilla);
                 } catch (FileNotFoundException ex) {
                     System.exit(0);
                     Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
@@ -122,24 +125,60 @@ public class MainController implements Initializable {
     }
     
     private void tocarStackPane(Casilla casilla){
-        if(servicios.getSelectionModel().getSelectedItem()!= null){
+        if(servicios.getSelectionModel().getSelectedItem()!= null && Administrador.jugable){
             Enumeration enu = Administrador.serviciosData.keys();
             String s = servicios.getSelectionModel().getSelectedItem().toString();
             while (enu.hasMoreElements()) {
                 if(enu.nextElement().toString().equals(s)){
                     ArrayList<String> data = Administrador.serviciosData.get(s);
                     Servicio servicio = new Servicio(s,data.get(0),Double.valueOf(data.get(1)),Double.valueOf(data.get(2)));
-                    casilla.setObjeto(servicio);
-                    System.out.println(s);
-                    
-                }
-                
+                    if(Administrador.ciudad.getPresupuesto() > servicio.getPrecioConstruccion()){             
+                        System.out.println(servicio.getCostoMensual());
+                        casilla.setObjeto(servicio);
+                        deducirServicio(servicio.getPrecioConstruccion(), servicio.getCostoMensual());
+                    }
+                }                
             }
         }
     }
     
-    private void modificarStackPane(Objeto objeto){
+    @FXML
+    public void presionarBoton(){
+        if(Administrador.permitirCreacion && ciudad.getText().length()>1 && alcalde.getText().length()>1){
+            if(dificultad.getSelectionModel().getSelectedItem()!= null){
+                String s = dificultad.getSelectionModel().getSelectedItem().toString();
+                Administrador.ciudad = new Ciudad(ciudad.getText(),alcalde.getText(),Dificultad.retornoDificultad(s),Administrador.casillas);
+                Administrador.jugable = true;
+                presupuestoText.setText(String.valueOf(Administrador.ciudad.getPresupuesto()));
+                Administrador.permitirCreacion = false;
+            }
+        }
+    }
+    
+    private void cambiarPresupuesto(){
+        if(Administrador.permitirCreacion && dificultad.getSelectionModel().getSelectedItem()!= null ){
+            String s = dificultad.getSelectionModel().getSelectedItem().toString();
+            if(s.equals(Dificultad.FACIL.toString())){
+                presupuestoText.setText(String.valueOf(Administrador.PRESUPUESTO_INICIAL_FACIL));
+            }
+            else if(s.equals(Dificultad.INTERMEDIO.toString())){
+                presupuestoText.setText(String.valueOf(Administrador.PRESUPUESTO_INICIAL_MEDIO));            }
+            else if(s.equals(Clases.Dificultad.DIFICIL.toString())){
+                presupuestoText.setText(String.valueOf(Administrador.PRESUPUESTO_INICIAL_DIFICIL));            }
+        }
+    }
+    
+    private void actualizarDatos(){
+        presupuestoText.setText(String.valueOf(Administrador.ciudad.getPresupuesto()));
+        gastosText.setText(String.valueOf(Administrador.ciudad.getGastos()));
+    }
+    
+    private void deducirServicio(Double precioConstruccion, Double gastoMensual){
+        Administrador.ciudad.reducirPresupuesto(precioConstruccion);    
+        Administrador.ciudad.aumentarGastoMensual(gastoMensual);
+        actualizarDatos();
         
     }
+    
     
 }

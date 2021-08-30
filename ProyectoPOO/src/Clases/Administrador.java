@@ -35,7 +35,9 @@ public class Administrador {
     public static Dictionary<String, ArrayList<String>> serviciosData;
     public static Dictionary<String, ArrayList<String>> construccionData;
     public static Ciudad ciudad;
-    public static boolean permitirCreacion = false;
+    public static boolean permitirCreacion = true;
+    public static ArrayList<Casilla> casillas;
+    public static boolean jugable=false;
     
     public static void cargarServicios(){
         serviciosData = new Hashtable<String, ArrayList<String>>();

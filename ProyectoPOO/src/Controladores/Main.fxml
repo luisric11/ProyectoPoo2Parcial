@@ -62,7 +62,7 @@
                   </Text>
                </children>
             </HBox>
-            <Button fx:id="boton" layoutX="1150.0" layoutY="18.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="92.0" style="-fx-background-radius: 12px;" text="Jugar">
+            <Button fx:id="boton" layoutX="1150.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#presionarBoton" prefHeight="30.0" prefWidth="92.0" style="-fx-background-radius: 12px;" text="Jugar">
                <font>
                   <Font size="14.0" />
                </font>

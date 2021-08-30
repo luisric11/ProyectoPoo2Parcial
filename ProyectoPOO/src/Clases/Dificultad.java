@@ -15,4 +15,17 @@ public enum Dificultad {
     INTERMEDIO,
     DIFICIL;
     
+    public static Dificultad retornoDificultad(String d){
+        if(d.equals(Dificultad.FACIL.toString())){
+            return FACIL;
+        }
+        else if(d.equals(Dificultad.INTERMEDIO.toString())){
+            return INTERMEDIO;            
+        }
+        else if(d.equals(Clases.Dificultad.DIFICIL.toString())){
+            return DIFICIL;
+        }
+        return null;
+    
+    }
 }
