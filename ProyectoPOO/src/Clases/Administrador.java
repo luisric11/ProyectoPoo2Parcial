@@ -15,6 +15,7 @@ import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.scene.control.Alert;
 
 /**
  *
@@ -28,7 +29,7 @@ public class Administrador {
     public static final int PRESUPUESTO_INICIAL_MEDIO=10000;
     public static final int PRESUPUESTO_INICIAL_DIFICIL=5000;
     public static final String PISO= "/recursos/grassTile";
-    public static final int DURACION_DIA_SEGUNDOS = 3;
+    public static final int DURACION_DIA_SEGUNDOS = 1;
     public static final int DURACION_MES_SEGUNDOS = 90;
     public static final int CONTAMINACION_IMPUESTO= 150;
     public static final int VECINDARIO=3;
@@ -107,6 +108,21 @@ public class Administrador {
         catch(Exception ex){}
         Platform.exit();
         System.exit(0);
+    }
+    
+    public static void quebrado(){     
+        System.out.println("quebrado");
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setTitle("LA CIUDAD " + ciudad.getCiudad() +" HA QUEBRADO");
+                alert.setContentText("LA GESTIÓN DEL ALCALDE "+ciudad.getAlcalde()+" HA ACABADO CON EL PRESUPUESTO" );
+                alert.show();
+            }
+        });
+        Administrador.tiempo.stop();
     }
     
     

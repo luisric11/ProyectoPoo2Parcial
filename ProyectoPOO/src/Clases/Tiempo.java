@@ -29,7 +29,10 @@ public class Tiempo extends Thread {
                 dia.setText(String.valueOf(Administrador.ciudad.getDia()));
                 if(Administrador.ciudad.getDia() % 30== 0){
                     Administrador.ciudad.pagarGastoMensual();
+                    Administrador.ciudad.aumentarPresupuesto();
+                    Administrador.ciudad.cobrarContaminacion();
                     presupuesto.setText(String.valueOf(Administrador.ciudad.getPresupuesto()));
+                    Administrador.ciudad.quebrado();
                 }
                 Administrador.ciudad.posibleResidencia();
                 Administrador.ciudad.posibleComercio();

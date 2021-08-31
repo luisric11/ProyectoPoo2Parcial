@@ -22,8 +22,9 @@ public class Ciudad {
     private double gastos;
     private ArrayList<Casilla> casillas;
     private int dia;
+    private int mesesQuebrados;
 
-    public Ciudad(String ciudad, String alcalde, Dificultad dificultad, double presupuesto, double gastos, ArrayList<Casilla> casillas,int dia) {
+    public Ciudad(String ciudad, String alcalde, Dificultad dificultad, double presupuesto, double gastos, ArrayList<Casilla> casillas,int dia,int mesesQuebrados) {
         this.ciudad = ciudad;
         this.alcalde = alcalde;
         this.dificultad = dificultad;
@@ -31,6 +32,7 @@ public class Ciudad {
         this.gastos = gastos;
         this.casillas = casillas;
         this.dia = dia;
+        this.mesesQuebrados = mesesQuebrados;
     }
 
     public Ciudad(String ciudad, String alcalde, Dificultad dificultad, ArrayList<Casilla> casillas) {
@@ -41,6 +43,7 @@ public class Ciudad {
         obtenerPresupuesto(dificultad);
         this.gastos = 0;
         this.casillas = casillas;
+        this.mesesQuebrados=0;
     }
     
     private void obtenerPresupuesto(Dificultad d){
@@ -281,6 +284,29 @@ public class Ciudad {
         }
     }
     
+    public  void cobrarContaminacion(){
+        int contador=0;
+        for(Casilla casilla: casillas){
+            if(casilla.getObjeto()!=null){
+                if(casilla.getObjeto().getNombre().equals("INDUSTRIAL")){
+                    contador++;
+                }
+            }
+        }
+        presupuesto = presupuesto +Administrador.CONTAMINACION_IMPUESTO*contador;
+    }
+    
+    public void quebrado(){
+        if(presupuesto<0 && mesesQuebrados<3){
+            mesesQuebrados++;
+        }
+        else if(presupuesto>0){
+            mesesQuebrados=0;
+        }
+        if(mesesQuebrados==3){
+            Administrador.quebrado();
+        }
+    }
     
     
     
