@@ -32,6 +32,7 @@ public class Tiempo extends Thread {
                     presupuesto.setText(String.valueOf(Administrador.ciudad.getPresupuesto()));
                 }
                 Administrador.ciudad.posibleResidencia();
+                Administrador.ciudad.posibleComercio();
             } 
             catch (Exception ex) {
                 System.out.println(ex);

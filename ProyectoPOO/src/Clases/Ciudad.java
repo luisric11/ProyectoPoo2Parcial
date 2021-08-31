@@ -188,6 +188,50 @@ public class Ciudad {
         }
     }
     
+    public void posibleComercio(){
+        for(Casilla casilla: casillas){
+            int contador =0;
+            boolean residencia=false;
+            boolean hospital_escuela=false;
+            ArrayList<String> objetos = new ArrayList<>();
+            for(Punto p: casilla.getVecindarioPos()){
+                for(Casilla s: Administrador.ciudad.getCasillas()){
+                    if(s.getPos().getI() == p.getI() && s.getPos().getJ() ==p.getJ() && s.getObjeto()!=null && casilla.getObjeto()==null){
+                        if(s.getObjeto().getNombre().equals("RESIDENCIAL")){
+                            residencia=true;
+                            contador++;
+                        }
+                        else if(s.getObjeto().getNombre().equals("HOSPITAL ") || s.getObjeto().getNombre().equals("ESCUELA") ){
+                            hospital_escuela=true;
+                            contador++;
+                        }
+                    }
+                }
+            }
+            if(residencia && hospital_escuela){
+                int numero = (int)(Math.random()*20+1);
+                System.out.println(numero);
+                if(numero<=contador){
+                    Enumeration enu = Administrador.construccionData.keys();
+                    while (enu.hasMoreElements()) {
+                        if(enu.nextElement().toString().equals("COMERCIAL")){
+                            System.out.println("comercio");
+                            ArrayList<String> data = Administrador.construccionData.get("COMERCIAL");
+                            Construccion comercio = new Construccion("COMERCIAL",data.get(3),Double.valueOf(data.get(0)),Double.valueOf(data.get(1)),Double.valueOf(data.get(2)));
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    casilla.setObjeto(comercio);
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
     
     
     
