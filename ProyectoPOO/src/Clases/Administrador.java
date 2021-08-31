@@ -14,6 +14,7 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 
 /**
  *
@@ -97,6 +98,15 @@ public class Administrador {
                 Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+    
+    public static void cerrar() throws IOException {
+        try{
+            Administrador.tiempo.stop();
+        }
+        catch(Exception ex){}
+        Platform.exit();
+        System.exit(0);
     }
     
     

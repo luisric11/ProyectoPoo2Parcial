@@ -6,6 +6,8 @@
 package Clases;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
+import javafx.application.Platform;
 
 /**
  *
@@ -145,22 +147,46 @@ public class Ciudad {
         presupuesto = presupuesto - gastos;
     }
     
-    public boolean posibleResidencia(){
+    public void posibleResidencia(){
         for(Casilla casilla: casillas){
+            ArrayList<String> objetos = new ArrayList<>();
             for(Punto p: casilla.getVecindarioPos()){
                 for(Casilla s: Administrador.ciudad.getCasillas()){
-                    if(s.getPos().getI() == p.getI() && s.getPos().getJ() ==p.getJ() && s.getObjeto()!=null){
+                    if(s.getPos().getI() == p.getI() && s.getPos().getJ() ==p.getJ() && s.getObjeto()!=null && casilla.getObjeto()==null){
                         if(s.getObjeto() instanceof Servicio){
-                            //System.out.println("exitoso");
+                            String nombre = s.getObjeto().getNombre();
+                            if(!objetos.contains(nombre)){
+                                objetos.add(nombre);
+                            }
+                        }
+                    }
+                }
+            }
+            if(objetos.size()>4){
+                int numero = (int)(Math.random()*20+1);
+                System.out.println(numero);
+                if(numero<=objetos.size()){
+                    Enumeration enu = Administrador.construccionData.keys();
+                    while (enu.hasMoreElements()) {
+                        if(enu.nextElement().toString().equals("RESIDENCIAL")){
+                            System.out.println("residencia");
+                            ArrayList<String> data = Administrador.construccionData.get("RESIDENCIAL");
+                            Construccion residencia = new Construccion("RESIDENCIAL",data.get(3),Double.valueOf(data.get(0)),Double.valueOf(data.get(1)),Double.valueOf(data.get(2)));
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    casilla.setObjeto(residencia);
+                                }
+                            });
+                            
+                            
+                            
                         }
                     }
                 }
             }
         }
-        return false;
-        
     }
-    
     
     
     

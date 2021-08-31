@@ -1,4 +1,4 @@
 nombre;valorAlumbradoPublico;valorAgua;impuestoSueloMensual;RutaImagen
-Residencial;50;50;50;ruta
-Comercial;100;100;90;ruta
-Industrial;150;150;70;ruta
+RESIDENCIAL;50;50;50;src/graphicResources/houses/
+COMERCIAL;100;100;90;src/graphicResources/Commercial/
+INDUSTRIAL;150;150;70;src/graphicResources/industry/

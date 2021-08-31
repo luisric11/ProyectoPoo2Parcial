@@ -51,8 +51,24 @@ public class Objeto {
     public Double getIngresoTotal(){
         return 0.0;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getRuta() {
+        return ruta;
+    }
+
+    public void setRuta(String ruta) {
+        this.ruta = ruta;
+    }
         
-     
+    
     
     
     

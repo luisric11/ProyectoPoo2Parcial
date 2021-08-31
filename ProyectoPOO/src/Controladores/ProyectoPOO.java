@@ -7,11 +7,13 @@ package Controladores;
 
 import Clases.Administrador;
 import Clases.Tiempo;
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  *
@@ -35,7 +37,17 @@ public class ProyectoPOO extends Application {
         Scene scene = new Scene(root);
         stage.setTitle("INICIO");
         stage.setScene(scene);
+        stage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
         stage.show();
+    }
+    
+    private void closeWindowEvent(WindowEvent event) {
+        System.out.println("Window close request ...");
+        try {
+            Administrador.cerrar();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
 }
