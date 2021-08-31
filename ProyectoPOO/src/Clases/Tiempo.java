@@ -14,9 +14,11 @@ import javafx.scene.text.Text;
 public class Tiempo extends Thread {
     
     public Text dia;
+    public Text presupuesto;
     
-    public Tiempo(Text dia){
+    public Tiempo(Text dia,Text presupuesto){
         this.dia = dia;
+        this.presupuesto = presupuesto;
     }
     
     public void run() {
@@ -25,9 +27,9 @@ public class Tiempo extends Thread {
                 Thread.sleep(Administrador.DURACION_DIA_SEGUNDOS*1000);
                 Administrador.ciudad.aumentarDia();
                 dia.setText(String.valueOf(Administrador.ciudad.getDia()));
-                System.out.println(Administrador.ciudad.getDia());
                 if(Administrador.ciudad.getDia() % 30== 0){
-                    System.out.println("mes");
+                    Administrador.ciudad.pagarGastoMensual();
+                    presupuesto.setText(String.valueOf(Administrador.ciudad.getPresupuesto()));
                 }
             } 
             catch (Exception ex) {

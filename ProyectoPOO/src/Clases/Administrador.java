@@ -27,7 +27,7 @@ public class Administrador {
     public static final int PRESUPUESTO_INICIAL_MEDIO=10000;
     public static final int PRESUPUESTO_INICIAL_DIFICIL=5000;
     public static final String PISO= "/recursos/grassTile";
-    public static final int DURACION_DIA_SEGUNDOS = 3;
+    public static final int DURACION_DIA_SEGUNDOS = 1;
     public static final int DURACION_MES_SEGUNDOS = 90;
     public static final int CONTAMINACION_IMPUESTO= 150;
     public static final int VECINDARIO=3;
@@ -97,10 +97,6 @@ public class Administrador {
                 Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }
-    
-    public static void cargarCiudad(){
-        
     }
     
     

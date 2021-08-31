@@ -19,16 +19,16 @@ public class Casilla {
     
     private StackPane stackPane;
     private Objeto objeto; 
-    private ArrayList<Integer> vecindarioPos;
-    private int pos;
+    private ArrayList<Punto> vecindarioPos;
+    private Punto pos;
     
-    public Casilla(StackPane stackPane,Objeto objeto,int pos) {
+    public Casilla(StackPane stackPane,Objeto objeto,Punto pos) {
         this.stackPane = stackPane;
         this.objeto = objeto;
         this.pos = pos;
     }
 
-    public Casilla(StackPane stackPane,int pos) {
+    public Casilla(StackPane stackPane,Punto pos) {
         this.stackPane = stackPane;
         this.pos = pos;
         generarVecindario();
@@ -51,27 +51,42 @@ public class Casilla {
         stackPane.getChildren().clear();
         try {
             stackPane.getChildren().add(objeto.generarImagen());
+            //pruebaCero();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Casilla.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public Punto getPos() {
+        return pos;
+    }
+
+    public void setPos(Punto pos) {
+        this.pos = pos;
+    }
+    
+    
     
     public void generarVecindario(){
-        for(int i = -Administrador.VECINDARIO;i==Administrador.VECINDARIO;i++){
-            for(int j = -Administrador.VECINDARIO;j==Administrador.VECINDARIO;i++){
-                int post = pos - Administrador.FILAS*i -j;
-                if(post > -1 && post < Administrador.COLUMNAS*Administrador.FILAS){
-                    vecindarioPos.add(post);
+        vecindarioPos =  new ArrayList<>();
+        for(int i = 1-Administrador.VECINDARIO;i<Administrador.VECINDARIO;i++){
+            for(int j = 1-Administrador.VECINDARIO;j<Administrador.VECINDARIO;j++){
+                Punto p =  new Punto(pos.getI()-j,pos.getJ()-i);
+                if(p.offlimits() &&(pos.getI()!=p.getI() || pos.getJ()!=p.getJ())){
+                    vecindarioPos.add(p);
                 }
             }            
         }
     }
     
-    
-    
-    
-
-    
-    
+    public void pruebaCero(){
+        for(Punto p: vecindarioPos){
+            for(Casilla s: Administrador.ciudad.getCasillas()){
+                if(s.getPos().getI() == p.getI() && s.getPos().getJ() ==p.getJ()){
+                    s.getStackPane().getChildren().clear();
+                }
+            }
+        }
+    }
     
 }

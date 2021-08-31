@@ -141,6 +141,14 @@ public class Ciudad {
         dia++;
     }
     
+    public void pagarGastoMensual(){
+        presupuesto = presupuesto - gastos;
+    }
+    
+    public void generarConstruccion(){
+        
+    }
+    
     
     
     

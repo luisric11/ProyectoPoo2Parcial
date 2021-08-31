@@ -107,8 +107,8 @@ public class MainController implements Initializable {
     private void inicializargridPane() throws FileNotFoundException{
         Administrador.casillas = new ArrayList<>();
         gridpane.getColumnConstraints().clear();
-        for(int i=0;i<Administrador.COLUMNAS;i++){
-            for(int j=0;j<Administrador.FILAS;j++){
+        for(int i=0;i<Administrador.FILAS;i++){
+            for(int j=0;j<Administrador.COLUMNAS;j++){
                 try {
                     StackPane stackPane= new StackPane();
                     Image image = new Image(new FileInputStream("src/graphicResources/grassTile.png"));
@@ -116,9 +116,9 @@ public class MainController implements Initializable {
                     imagen.setFitHeight(40);
                     imagen.setFitWidth(40);
                     stackPane.getChildren().add(imagen); 
-                    int v = (i*1) * (j+1);
-                    Casilla casilla = new Casilla(stackPane,v);
-                    gridpane.add(stackPane,i, j);
+                    Punto p = new Punto(i,j);
+                    Casilla casilla = new Casilla(stackPane,p);
+                    gridpane.add(stackPane,j, i);
                     stackPane.setOnMouseClicked(e -> tocarStackPane(casilla));
                     Administrador.casillas.add(casilla);
                 } catch (FileNotFoundException ex) {
@@ -154,7 +154,7 @@ public class MainController implements Initializable {
                 Administrador.jugable = true;
                 presupuestoText.setText(String.valueOf(Administrador.ciudad.getPresupuesto()));
                 Administrador.permitirCreacion = false;
-                Administrador.tiempo = new Tiempo(dia);
+                Administrador.tiempo = new Tiempo(dia,presupuestoText);
                 Administrador.tiempo.start();
             }
         }
