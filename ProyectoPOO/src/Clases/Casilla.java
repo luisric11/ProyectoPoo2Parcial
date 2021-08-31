@@ -56,6 +56,10 @@ public class Casilla {
             Logger.getLogger(Casilla.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void demoler(){
+        this.objeto=null;
+    }
 
     public Punto getPos() {
         return pos;
@@ -63,6 +67,14 @@ public class Casilla {
 
     public void setPos(Punto pos) {
         this.pos = pos;
+    }
+
+    public ArrayList<Punto> getVecindarioPos() {
+        return vecindarioPos;
+    }
+
+    public void setVecindarioPos(ArrayList<Punto> vecindarioPos) {
+        this.vecindarioPos = vecindarioPos;
     }
     
     

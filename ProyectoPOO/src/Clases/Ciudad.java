@@ -145,9 +145,22 @@ public class Ciudad {
         presupuesto = presupuesto - gastos;
     }
     
-    public void generarConstruccion(){
+    public boolean posibleResidencia(){
+        for(Casilla casilla: casillas){
+            for(Punto p: casilla.getVecindarioPos()){
+                for(Casilla s: Administrador.ciudad.getCasillas()){
+                    if(s.getPos().getI() == p.getI() && s.getPos().getJ() ==p.getJ() && s.getObjeto()!=null){
+                        if(s.getObjeto() instanceof Servicio){
+                            //System.out.println("exitoso");
+                        }
+                    }
+                }
+            }
+        }
+        return false;
         
     }
+    
     
     
     

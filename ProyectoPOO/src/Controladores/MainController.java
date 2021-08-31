@@ -101,6 +101,7 @@ public class MainController implements Initializable {
         while (enu.hasMoreElements()) {
             servs.add(enu.nextElement().toString());
         }
+        servs.add("DEMOLER");
         servicios.getItems().addAll(servs);
     }
     
@@ -109,21 +110,13 @@ public class MainController implements Initializable {
         gridpane.getColumnConstraints().clear();
         for(int i=0;i<Administrador.FILAS;i++){
             for(int j=0;j<Administrador.COLUMNAS;j++){
-                try {
-                    StackPane stackPane= new StackPane();
-                    Image image = new Image(new FileInputStream("src/graphicResources/grassTile.png"));
-                    ImageView imagen = new ImageView(image);
-                    imagen.setFitHeight(40);
-                    imagen.setFitWidth(40);
-                    stackPane.getChildren().add(imagen); 
-                    Punto p = new Punto(i,j);
-                    Casilla casilla = new Casilla(stackPane,p);
-                    gridpane.add(stackPane,j, i);
-                    stackPane.setOnMouseClicked(e -> tocarStackPane(casilla));
-                    Administrador.casillas.add(casilla);
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                StackPane stackPane= new StackPane();
+                stackPane.getChildren().add(generarCesped());
+                Punto p = new Punto(i,j);
+                Casilla casilla = new Casilla(stackPane,p);
+                gridpane.add(stackPane,j, i);
+                stackPane.setOnMouseClicked(e -> tocarStackPane(casilla));
+                Administrador.casillas.add(casilla);
             }
         }
     }
@@ -132,16 +125,28 @@ public class MainController implements Initializable {
         if(servicios.getSelectionModel().getSelectedItem()!= null && Administrador.jugable){
             Enumeration enu = Administrador.serviciosData.keys();
             String s = servicios.getSelectionModel().getSelectedItem().toString();
-            while (enu.hasMoreElements()) {
-                if(enu.nextElement().toString().equals(s)){
-                    ArrayList<String> data = Administrador.serviciosData.get(s);
-                    Servicio servicio = new Servicio(s,data.get(0),Double.valueOf(data.get(1)),Double.valueOf(data.get(2)));
-                    if(Administrador.ciudad.getPresupuesto() > servicio.getPrecioConstruccion()){             
-                        casilla.setObjeto(servicio); 
-                        deducirServicio(servicio.getPrecioConstruccion(), servicio.getCostoMensual());
-                    }
-                }                
+            if(s.equals("DEMOLER")){
+                if(casilla.getObjeto()!= null){
+                    casilla.demoler();
+                    casilla.getStackPane().getChildren().add(generarCesped());
+                    Administrador.ciudad.aumentarGastoMensual();
+                    actualizarDatos();
+                }
+                
             }
+            else{
+                while (enu.hasMoreElements()) {
+                    if(enu.nextElement().toString().equals(s)){
+                        ArrayList<String> data = Administrador.serviciosData.get(s);
+                        Servicio servicio = new Servicio(s,data.get(0),Double.valueOf(data.get(1)),Double.valueOf(data.get(2)));
+                        if(Administrador.ciudad.getPresupuesto() > servicio.getPrecioConstruccion()){             
+                            casilla.setObjeto(servicio); 
+                            deducirServicio(servicio.getPrecioConstruccion(), servicio.getCostoMensual());
+                            
+                        }
+                    }                
+                }            
+            }   
         }
     }
     
@@ -183,6 +188,19 @@ public class MainController implements Initializable {
         Administrador.ciudad.aumentarGastoMensual();
         actualizarDatos();
         
+    }
+    
+    private ImageView generarCesped(){
+        try {
+            Image image = new Image(new FileInputStream("src/graphicResources/grassTile.png"));
+            ImageView imagen = new ImageView(image);
+            imagen.setFitHeight(40);
+            imagen.setFitWidth(40);
+            return imagen;
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
     
     
