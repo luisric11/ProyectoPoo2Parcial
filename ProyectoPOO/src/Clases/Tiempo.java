@@ -33,6 +33,7 @@ public class Tiempo extends Thread {
                 }
                 Administrador.ciudad.posibleResidencia();
                 Administrador.ciudad.posibleComercio();
+                Administrador.ciudad.posibleIndustria();
             } 
             catch (Exception ex) {
                 System.out.println(ex);
